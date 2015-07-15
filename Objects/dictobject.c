@@ -8,6 +8,7 @@
 */
 
 #include "Python.h"
+#include "structmember.h"
 
 
 /* Set a key error with the specified argument, wrapping it in a
@@ -289,7 +290,12 @@ PyDict_New(void)
 #ifdef SHOW_CONVERSION_COUNTS
     ++created;
 #endif
-    return (PyObject *)mp;
+
+    PyObject* self = (PyObject*) mp;
+    PyObject** dictptr = _PyObject_GetDictPtr(self);
+    *dictptr = self;
+
+    return self;
 }
 
 /*
@@ -2406,7 +2412,7 @@ PyTypeObject PyDict_Type = {
     0,                                          /* tp_dict */
     0,                                          /* tp_descr_get */
     0,                                          /* tp_descr_set */
-    0,                                          /* tp_dictoffset */
+    offsetof(PyDictObject, dict),               /* tp_dictoffset */
     dict_init,                                  /* tp_init */
     PyType_GenericAlloc,                        /* tp_alloc */
     dict_new,                                   /* tp_new */

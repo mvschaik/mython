@@ -86,6 +86,8 @@ struct _dictobject {
     PyDictEntry *ma_table;
     PyDictEntry *(*ma_lookup)(PyDictObject *mp, PyObject *key, long hash);
     PyDictEntry ma_smalltable[PyDict_MINSIZE];
+
+    PyObject *dict;
 };
 
 PyAPI_DATA(PyTypeObject) PyDict_Type;
