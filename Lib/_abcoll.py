@@ -409,9 +409,9 @@ class Mapping(Sized, Iterable, Container):
         "D.keys() -> list of D's keys"
         return list(self)
 
-    def items(self):
-        "D.items() -> list of D's (key, value) pairs, as 2-tuples"
-        return [(key, self[key]) for key in self]
+#    def items(self):
+#        "D.items() -> list of D's (key, value) pairs, as 2-tuples"
+#        return [(key, self[key]) for key in self]
 
     def values(self):
         "D.values() -> list of D's values"
