@@ -2340,6 +2340,10 @@ dict_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
         /* The object has been implicitly tracked by tp_alloc */
         if (type == &PyDict_Type)
             _PyObject_GC_UNTRACK(d);
+
+        PyObject** dictptr = _PyObject_GetDictPtr(self);
+        *dictptr = self;
+
 #ifdef SHOW_CONVERSION_COUNTS
         ++created;
 #endif
